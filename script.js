@@ -24,6 +24,8 @@ let usuarios = [];
 // declaración array filtrado
 let usuariosFiltrado = [];
 
+
+
 // constructor objeto usuario
 function Usuario( name, country, money, premiumAccount )
 {
@@ -34,25 +36,36 @@ function Usuario( name, country, money, premiumAccount )
 }
 
 
-const createUsers = () => {
-  // declaraciones de usuarios
-  let user1 = new Usuario( "usuario1", "spain", 199, true );
-  let user2 = new Usuario( "usuario2", "france", 0, false );
-  let user3 = new Usuario( "usuario3", "spain", 537, false );
-  let user4 = new Usuario( "usuario4", "italy", 1004, true );
-  let user5 = new Usuario( "usuario5", "spain", 250, false );
-  let user6 = new Usuario( "usuario6", "ireland", 799, true );
-  let user7 = new Usuario( "usuario7", "spain", 3345, false );
 
-  // asignación de usuarios dentro del array
-  usuarios[0] = user1;
-  usuarios[1] = user2;
-  usuarios[2] = user3;
-  usuarios[3] = user4;
-  usuarios[4] = user5;
-  usuarios[5] = user6;
-  usuarios[6] = user7;  
+const createUsers = () => {
+  // creción de usuarios dentro del array usuarios
+  usuarios[0] = new Usuario( "usuario1", "spain", 199, true );
+  usuarios[1] = new Usuario( "usuario2", "france", 0, false );
+  usuarios[2] = new Usuario( "usuario3", "spain", 537, false );
+  usuarios[3] = new Usuario( "usuario4", "italy", 1004, true );
+  usuarios[4] = new Usuario( "usuario5", "spain", 250, false );
+  usuarios[5] = new Usuario( "usuario6", "ireland", 799, true );
+  usuarios[6] = new Usuario( "usuario7", "spain", 3345, false );
 }
+
+
+
+// función que filtra los usuarios. V1
+const filterUsersV1 = () => {
+  // filtrado de usuarios
+  for (let i = 0; i < usuarios.length; i++) {
+    if ((usuarios[i].country == 'spain') && (usuarios[i].money > 200)) {
+      usuariosFiltrado.push(usuarios[i]);
+    }
+  }
+}
+
+// función que filtra los usuarios. V2
+const filterUsersV2 = () => {
+  // se filtran los usuarios y se asigna al array de usuarios filtrados
+  usuariosFiltrado = usuarios.filter(user => user.country == 'spain' && user.money > 200);
+}
+
 
 
 // función auxiliar para mostrar usuarios.
@@ -60,17 +73,6 @@ const mostrarUsuarios = () => {
   // mostrar usuarios del array
   for (let i = 0; i < usuarios.length; i++) {
     console.log(usuarios[i]);
-  }
-}
-
-
-// función que filtra los usuarios
-const filterUsers = () => {
-  // filtrado de usuarios
-  for (let i = 0; i < usuarios.length; i++) {
-    if ((usuarios[i].country == 'spain') && (usuarios[i].money > 200)) {
-      usuariosFiltrado.push(usuarios[i]);
-    }
   }
 }
 
@@ -88,19 +90,20 @@ window.addEventListener('load',onLoad);
 
 function onLoad(){
 
-  // Creación de usuarios
+  // -- Creación de usuarios --
   createUsers();
 
-  // Filtrado de usuarios
-  filterUsers();
+  // -- Filtrado de usuarios --
+  // filterUsersV1();
+  filterUsersV2();
 
-  // Mostrar usuarios
+  // -- Mostrar usuarios --
   console.log("Usuarios:");
   console.log(usuarios);
   //console.log(mostrarUsuarios());
 
 
-  // Mostrar usuarios filtrados
+  // -- Mostrar usuarios filtrados --
   console.log("Usuarios filtrados:");
   console.log(usuariosFiltrado);
   //console.log(mostrarUsuariosFiltrados());
